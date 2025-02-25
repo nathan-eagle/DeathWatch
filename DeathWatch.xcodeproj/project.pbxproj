@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		FA492C172D6D1236007D85AF /* DeathWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FA492C162D6D1236007D85AF /* DeathWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FA492C542D6D13E0007D85AF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA492C532D6D13E0007D85AF /* WidgetKit.framework */; };
+		FA492C562D6D13E0007D85AF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA492C552D6D13E0007D85AF /* SwiftUI.framework */; };
+		FA492C612D6D13E1007D85AF /* LifeCountdownWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FA492C512D6D13E0007D85AF /* LifeCountdownWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +35,13 @@
 			remoteGlobalIDString = FA492C152D6D1236007D85AF;
 			remoteInfo = "DeathWatch Watch App";
 		};
+		FA492C5F2D6D13E1007D85AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA492C0A2D6D1236007D85AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA492C502D6D13E0007D85AF;
+			remoteInfo = LifeCountdownWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +56,17 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA492C662D6D13E1007D85AF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FA492C612D6D13E1007D85AF /* LifeCountdownWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -53,11 +74,35 @@
 		FA492C162D6D1236007D85AF /* DeathWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DeathWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA492C282D6D1237007D85AF /* DeathWatch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeathWatch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA492C322D6D1238007D85AF /* DeathWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeathWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA492C512D6D13E0007D85AF /* LifeCountdownWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeCountdownWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA492C532D6D13E0007D85AF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FA492C552D6D13E0007D85AF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FA7886BC2D6E397000E9F4A8 /* LifeCountdownWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeCountdownWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FA492C622D6D13E1007D85AF /* Exceptions for "LifeCountdownWidget" folder in "LifeCountdownWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FA492C502D6D13E0007D85AF /* LifeCountdownWidgetExtension */;
+		};
+		FA492C682D6D17EE007D85AF /* Exceptions for "DeathWatch Watch App" folder in "LifeCountdownWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CountdownData.swift,
+			);
+			target = FA492C502D6D13E0007D85AF /* LifeCountdownWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FA492C1A2D6D1236007D85AF /* DeathWatch Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FA492C682D6D17EE007D85AF /* Exceptions for "DeathWatch Watch App" folder in "LifeCountdownWidgetExtension" target */,
+			);
 			path = "DeathWatch Watch App";
 			sourceTree = "<group>";
 		};
@@ -69,6 +114,14 @@
 		FA492C352D6D1238007D85AF /* DeathWatch Watch AppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "DeathWatch Watch AppUITests";
+			sourceTree = "<group>";
+		};
+		FA492C572D6D13E0007D85AF /* LifeCountdownWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FA492C622D6D13E1007D85AF /* Exceptions for "LifeCountdownWidget" folder in "LifeCountdownWidgetExtension" target */,
+			);
+			path = LifeCountdownWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -95,15 +148,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA492C4E2D6D13E0007D85AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA492C562D6D13E0007D85AF /* SwiftUI.framework in Frameworks */,
+				FA492C542D6D13E0007D85AF /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		FA492C092D6D1236007D85AF = {
 			isa = PBXGroup;
 			children = (
+				FA7886BC2D6E397000E9F4A8 /* LifeCountdownWidgetExtension.entitlements */,
 				FA492C1A2D6D1236007D85AF /* DeathWatch Watch App */,
 				FA492C2B2D6D1237007D85AF /* DeathWatch Watch AppTests */,
 				FA492C352D6D1238007D85AF /* DeathWatch Watch AppUITests */,
+				FA492C572D6D13E0007D85AF /* LifeCountdownWidget */,
+				FA492C522D6D13E0007D85AF /* Frameworks */,
 				FA492C112D6D1236007D85AF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,8 +180,18 @@
 				FA492C162D6D1236007D85AF /* DeathWatch Watch App.app */,
 				FA492C282D6D1237007D85AF /* DeathWatch Watch AppTests.xctest */,
 				FA492C322D6D1238007D85AF /* DeathWatch Watch AppUITests.xctest */,
+				FA492C512D6D13E0007D85AF /* LifeCountdownWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FA492C522D6D13E0007D85AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA492C532D6D13E0007D85AF /* WidgetKit.framework */,
+				FA492C552D6D13E0007D85AF /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,10 +223,12 @@
 				FA492C122D6D1236007D85AF /* Sources */,
 				FA492C132D6D1236007D85AF /* Frameworks */,
 				FA492C142D6D1236007D85AF /* Resources */,
+				FA492C662D6D13E1007D85AF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FA492C602D6D13E1007D85AF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				FA492C1A2D6D1236007D85AF /* DeathWatch Watch App */,
@@ -209,6 +286,28 @@
 			productReference = FA492C322D6D1238007D85AF /* DeathWatch Watch AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		FA492C502D6D13E0007D85AF /* LifeCountdownWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA492C632D6D13E1007D85AF /* Build configuration list for PBXNativeTarget "LifeCountdownWidgetExtension" */;
+			buildPhases = (
+				FA492C4D2D6D13E0007D85AF /* Sources */,
+				FA492C4E2D6D13E0007D85AF /* Frameworks */,
+				FA492C4F2D6D13E0007D85AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FA492C572D6D13E0007D85AF /* LifeCountdownWidget */,
+			);
+			name = LifeCountdownWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = LifeCountdownWidgetExtension;
+			productReference = FA492C512D6D13E0007D85AF /* LifeCountdownWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -233,6 +332,9 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = FA492C152D6D1236007D85AF;
 					};
+					FA492C502D6D13E0007D85AF = {
+						CreatedOnToolsVersion = 16.2;
+					};
 				};
 			};
 			buildConfigurationList = FA492C0D2D6D1236007D85AF /* Build configuration list for PBXProject "DeathWatch" */;
@@ -253,6 +355,7 @@
 				FA492C152D6D1236007D85AF /* DeathWatch Watch App */,
 				FA492C272D6D1237007D85AF /* DeathWatch Watch AppTests */,
 				FA492C312D6D1238007D85AF /* DeathWatch Watch AppUITests */,
+				FA492C502D6D13E0007D85AF /* LifeCountdownWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +389,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA492C4F2D6D13E0007D85AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -310,6 +420,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA492C4D2D6D13E0007D85AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -327,6 +444,11 @@
 			isa = PBXTargetDependency;
 			target = FA492C152D6D1236007D85AF /* DeathWatch Watch App */;
 			targetProxy = FA492C332D6D1238007D85AF /* PBXContainerItemProxy */;
+		};
+		FA492C602D6D13E1007D85AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA492C502D6D13E0007D85AF /* LifeCountdownWidgetExtension */;
+			targetProxy = FA492C5F2D6D13E1007D85AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -450,9 +572,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "DeathWatch Watch App/DeathWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DeathWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = X7JNP829XC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DeathWatch;
@@ -479,9 +603,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "DeathWatch Watch App/DeathWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DeathWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = X7JNP829XC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DeathWatch;
@@ -509,6 +635,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X7JNP829XC;
 				INFOPLIST_KEY_CFBundleDisplayName = DeathWatch;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AerieVentures.DeathWatch;
@@ -523,6 +650,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X7JNP829XC;
 				INFOPLIST_KEY_CFBundleDisplayName = DeathWatch;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AerieVentures.DeathWatch;
@@ -609,6 +737,69 @@
 			};
 			name = Release;
 		};
+		FA492C642D6D13E1007D85AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = LifeCountdownWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X7JNP829XC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeCountdownWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LifeCountdownWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AerieVentures.DeathWatch.watchkitapp.LifeCountdownWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		FA492C652D6D13E1007D85AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = LifeCountdownWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X7JNP829XC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeCountdownWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LifeCountdownWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AerieVentures.DeathWatch.watchkitapp.LifeCountdownWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -653,6 +844,15 @@
 			buildConfigurations = (
 				FA492C472D6D1238007D85AF /* Debug */,
 				FA492C482D6D1238007D85AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA492C632D6D13E1007D85AF /* Build configuration list for PBXNativeTarget "LifeCountdownWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA492C642D6D13E1007D85AF /* Debug */,
+				FA492C652D6D13E1007D85AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
