@@ -1,5 +1,6 @@
 import WidgetKit
 import SwiftUI
+import WatchKit
 
 // Use the exact same app group and key
 let sharedDefaults = UserDefaults(suiteName: "group.AerieVentures.DeathWatch") ?? UserDefaults.standard
@@ -129,23 +130,70 @@ struct Provider: TimelineProvider {
 struct LifeCountdownWidgetEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var widgetFamily
-
+    
+    // Watch size categories
+    private enum WatchSize {
+        case ultra, large, medium, small
+    }
+    
+    // Get current watch size category
+    private var watchSizeCategory: WatchSize {
+        let screenWidth = WKInterfaceDevice.current().screenBounds.width
+        
+        switch screenWidth {
+        case 198...: return .ultra     // Ultra (198+)
+        case 170..<198: return .large  // Larger watches (170-197)
+        case 150..<170: return .medium // Medium watches (150-170)
+        default: return .small         // Small watches (<150)
+        }
+    }
+    
+    // Size helpers that preserve Ultra experience
+    private var symbolFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 30  // Keep original size for Ultra
+        case .large: return 28
+        case .medium: return 25
+        case .small: return 22
+        }
+    }
+    
+    private var titleFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 13  // Keep original size for Ultra
+        case .large: return 12
+        case .medium: return 11
+        case .small: return 9
+        }
+    }
+    
+    private var valueFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 47  // Keep original size for Ultra
+        case .large: return 44
+        case .medium: return 40
+        case .small: return 36
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .center, spacing: -18) { // Negative spacing to pull elements closer together
             HStack(spacing: 3) {
                 Text("☠︎")
-                    .font(.system(size: 30))
+                    .font(.system(size: symbolFontSize))
                     .foregroundColor(.white)
                 
                 Text(entry.countdown.selectedTimeUnit.displayName)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.system(size: titleFontSize, weight: .medium))
+                    .minimumScaleFactor(watchSizeCategory == .small ? 0.7 : 0.9)
+                    .lineLimit(1)
                     .foregroundColor(.white.opacity(0.9))
                     .tracking(0.5) // letter spacing
             }
             .padding(.top, 4)
             
             Text("\(entry.countdown.displayValue)")
-                .font(.system(size: 47, weight: .regular))
+                .font(.system(size: valueFontSize, weight: .regular))
                 .monospacedDigit()
                 .foregroundColor(.white)
                 .padding(.bottom, 4)
@@ -165,7 +213,7 @@ struct LifeCountdownWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             LifeCountdownWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Life Countdown")
+        .configurationDisplayName("Death-Watch")
         .description("Shows hours left until your death date.")
         .supportedFamilies([.accessoryRectangular])
         .contentMarginsDisabled()

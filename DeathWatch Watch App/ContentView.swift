@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import WatchKit
 
 // Create a UserDefaults suite that can be shared with the widget
 let sharedDefaults = UserDefaults(suiteName: "group.AerieVentures.DeathWatch") ?? UserDefaults.standard
@@ -23,6 +24,52 @@ struct ContentView: View {
         let savedValue = sharedDefaults.string(forKey: "selectedTimeUnit") ?? TimeUnit.hours.rawValue
         return TimeUnit(rawValue: savedValue) ?? .hours
     }()
+    
+    // Watch size categories
+    private enum WatchSize {
+        case ultra, large, medium, small
+    }
+    
+    // Get current watch size category
+    private var watchSizeCategory: WatchSize {
+        let screenWidth = WKInterfaceDevice.current().screenBounds.width
+        
+        switch screenWidth {
+        case 198...: return .ultra     // Ultra (198+)
+        case 170..<198: return .large  // Larger watches (170-197)
+        case 150..<170: return .medium // Medium watches (150-170)
+        default: return .small         // Small watches (<150)
+        }
+    }
+    
+    // Size helpers that preserve Ultra experience
+    private var labelFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 12  // Keep original size for Ultra
+        case .large: return 11.5
+        case .medium: return 11
+        case .small: return 10
+        }
+    }
+    
+    private var valueFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 12  // Keep original size for Ultra
+        case .large: return 11.5
+        case .medium: return 11
+        case .small: return 10
+        }
+    }
+    
+    // Add this new property for the date display text
+    private var dateDisplayFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 10  // Keep original size for Ultra
+        case .large: return 9.5
+        case .medium: return 9
+        case .small: return 8   // Smaller size for 40mm SE
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -57,8 +104,10 @@ struct ContentView: View {
                 // Date display and navigation
                 VStack(spacing: 6) {
                     Text("Death Date set to \(formattedDate)")
-                        .font(.system(size: 10))
+                        .font(.system(size: dateDisplayFontSize))  // Use the responsive font size
                         .foregroundColor(.secondary)
+                        .lineLimit(1)  // Ensure it stays on one line
+                        .minimumScaleFactor(0.8)  // Allow slight scaling if needed
                     
                     NavigationLink(destination: ManualDatePickerScreen(initialDate: targetDate, onDateSelected: { newDate in
                         targetDate = newDate
@@ -98,10 +147,10 @@ struct ContentView: View {
     func timeRemainingView(title: String, value: Int) -> some View {
         HStack {
             Text(title)
-                .font(.system(size: 12))
+                .font(.system(size: labelFontSize))
             Spacer()
             Text("\(value)")
-                .font(.system(size: 12, design: .monospaced))
+                .font(.system(size: valueFontSize, design: .monospaced))
         }
     }
     
@@ -156,6 +205,52 @@ struct ManualDatePickerScreen: View {
         case month, day, year
     }
     
+    // Watch size categories - reuse the same as ContentView
+    private enum WatchSize {
+        case ultra, large, medium, small
+    }
+    
+    // Get current watch size category
+    private var watchSizeCategory: WatchSize {
+        let screenWidth = WKInterfaceDevice.current().screenBounds.width
+        
+        switch screenWidth {
+        case 198...: return .ultra     // Ultra (198+)
+        case 170..<198: return .large  // Larger watches (170-197)
+        case 150..<170: return .medium // Medium watches (150-170)
+        default: return .small         // Small watches (<150)
+        }
+    }
+    
+    // Size helpers that preserve Ultra experience
+    private var headlineFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 16     // Keep original size for Ultra
+        case .large: return 15
+        case .medium: return 14
+        case .small: return 13
+        }
+    }
+    
+    private var buttonFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 15     // Keep original size for Ultra
+        case .large: return 14
+        case .medium: return 13
+        case .small: return 12
+        }
+    }
+    
+    // For the component view
+    private var componentFontSize: CGFloat {
+        switch watchSizeCategory {
+        case .ultra: return 20     // Keep original size for Ultra
+        case .large: return 18
+        case .medium: return 16
+        case .small: return 14
+        }
+    }
+    
     init(initialDate: Date, onDateSelected: @escaping (Date) -> Void) {
         self.initialDate = initialDate
         self.onDateSelected = onDateSelected
@@ -169,7 +264,7 @@ struct ManualDatePickerScreen: View {
     var body: some View {
         VStack(spacing: 15) {
             Text("Set Death Date")
-                .font(.headline)
+                .font(.system(size: headlineFontSize, weight: .semibold))
                 .foregroundColor(.white)
             
             // Digital crown date picker
@@ -183,7 +278,8 @@ struct ManualDatePickerScreen: View {
                     onTap: { 
                         focusedField = .month
                         crownValue = Double(month)
-                    }
+                    },
+                    fontSize: componentFontSize
                 )
                 
                 Text("/").foregroundColor(.gray)
@@ -197,7 +293,8 @@ struct ManualDatePickerScreen: View {
                     onTap: { 
                         focusedField = .day
                         crownValue = Double(day)
-                    }
+                    },
+                    fontSize: componentFontSize
                 )
                 
                 Text("/").foregroundColor(.gray)
@@ -211,7 +308,8 @@ struct ManualDatePickerScreen: View {
                     onTap: { 
                         focusedField = .year
                         crownValue = Double(year)
-                    }
+                    },
+                    fontSize: componentFontSize
                 )
             }
             .focusable()
@@ -240,6 +338,7 @@ struct ManualDatePickerScreen: View {
                     dismiss()
                 }
             }
+            .font(.system(size: buttonFontSize, weight: .medium))
             .fontWeight(.medium)
             .frame(maxWidth: .infinity)
             .padding(8)
@@ -298,17 +397,18 @@ struct ManualDatePickerScreen: View {
     }
 }
 
-// Component for each date part (month, day, year)
+// Update the DateComponentView to accept a font size parameter
 struct DateComponentView: View {
     @Binding var value: Int
     let range: ClosedRange<Int>
     let isFocused: Bool
     let formatter: (Int) -> String
     let onTap: () -> Void
+    let fontSize: CGFloat // New parameter for font size
     
     var body: some View {
         Text(formatter(value))
-            .font(.system(size: 20, weight: .medium, design: .monospaced))
+            .font(.system(size: fontSize, weight: .medium, design: .monospaced))
             .padding(.vertical, 8)
             .padding(.horizontal, 2)
             .frame(minWidth: isFocused ? 45 : 42)
