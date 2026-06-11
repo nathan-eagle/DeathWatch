@@ -9,6 +9,9 @@ struct ContentView: View {
         if let accentID = Self.launchArgumentValue(for: "--accent") {
             LifeEngine.accentID = accentID
         }
+        if let unit = Self.launchArgumentValue(for: "--unit").flatMap(TimeUnit.init) {
+            LifeEngine.selectedUnit = unit
+        }
         if let page = Self.launchArgumentValue(for: "--page").flatMap(Int.init) {
             _selection = State(initialValue: page)
         }

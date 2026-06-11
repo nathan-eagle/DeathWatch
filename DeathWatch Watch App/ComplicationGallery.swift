@@ -127,22 +127,23 @@ struct ComplicationGallery: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text("☠︎")
-                    .font(.system(size: 10, weight: .semibold))
-                Text(snapshot.unit.displayName)
+                    .font(.system(size: 11, weight: .semibold))
+                Text(snapshot.unit.morbidName)
                     .font(DW.unitLabelFont)
                     .tracking(DW.unitLabelTracking)
+                    .minimumScaleFactor(0.8)
             }
             .foregroundStyle(.secondary)
             .lineLimit(1)
 
-            Spacer(minLength: 2)
+            Spacer(minLength: 1)
 
             Text(snapshot.countdownText)
-                .font(DW.numberFont(28))
+                .font(DW.numberFont(36))
                 .monospacedDigit()
                 .foregroundStyle(.white)
                 .lineLimit(1)
-                .minimumScaleFactor(0.6)
+                .minimumScaleFactor(0.55)
 
             Spacer(minLength: 4)
 

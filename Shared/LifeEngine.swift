@@ -22,6 +22,10 @@ enum TimeUnit: String, CaseIterable {
         }
     }
 
+    var morbidName: String {
+        "\(displayName) TO LIVE"
+    }
+
     var next: TimeUnit {
         let all = Self.allCases
         let index = all.firstIndex(of: self) ?? 0
