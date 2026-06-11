@@ -6,16 +6,19 @@ struct ContentView: View {
 
     #if DEBUG
     init() {
-        if let page = Self.launchPageOverride {
+        if let accentID = Self.launchArgumentValue(for: "--accent") {
+            LifeEngine.accentID = accentID
+        }
+        if let page = Self.launchArgumentValue(for: "--page").flatMap(Int.init) {
             _selection = State(initialValue: page)
         }
     }
 
-    private static var launchPageOverride: Int? {
+    private static func launchArgumentValue(for flag: String) -> String? {
         let arguments = CommandLine.arguments
-        guard let flagIndex = arguments.firstIndex(of: "--page"),
+        guard let flagIndex = arguments.firstIndex(of: flag),
               arguments.indices.contains(flagIndex + 1) else { return nil }
-        return Int(arguments[flagIndex + 1])
+        return arguments[flagIndex + 1]
     }
     #endif
 
